@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { useEffect } from "react"
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom"
 
 import Login from "./pages/Login"
 import Register from "./pages/Register"
@@ -12,6 +13,16 @@ import ProtectedRoute from "./components/ProtectedRoute"
 
 
 function Home() {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/login")
+    }, 2000)
+
+    return () => clearTimeout(timer)
+  }, [navigate])
+
   return (
     <div className="min-h-screen flex items-center justify-center">
       <h1 className="text-3xl font-bold">
@@ -28,7 +39,7 @@ function App() {
 
       <Routes>
 
-        
+        {/* Home */}
 
         <Route
           path="/"
@@ -36,7 +47,7 @@ function App() {
         />
 
 
-        
+        {/* Authentication */}
 
         <Route
           path="/login"
@@ -49,7 +60,7 @@ function App() {
         />
 
 
-       
+        {/* Buyer */}
 
         <Route
           path="/buyer/dashboard"
@@ -88,7 +99,7 @@ function App() {
         />
 
 
-        
+        {/* Supplier */}
 
         <Route
           path="/supplier/dashboard"
